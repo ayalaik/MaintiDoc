@@ -1,0 +1,16 @@
+# Environnement virtuel et caches
+.venv/
+__pycache__/
+*.pyc
+.vscode/
+
+# Secrets
+.env
+
+# Documents de cadrage du prof et fichiers volumineux
+autres/
+*.zip
+
+# Modèles et données générées
+models/
+data/

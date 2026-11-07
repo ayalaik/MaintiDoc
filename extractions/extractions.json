@@ -1,0 +1,290 @@
+[
+  {
+    "famille": "famille_A",
+    "fichier": "fiche_technique_pompe_PC-200.pdf",
+    "page": 1,
+    "texte": "    Fiche technique - Pompe centrifuge PC-200\n              (document de test)\n\n1. Présentation\nLa pompe centrifuge PC-200 est une pompe monocellulaire horizontale destinée au transfert d'eau\npropre et d'eaux légèrement chargées dans les installations industrielles et de bâtiment.\n2. Caractéristiques techniques\nLes principales caractéristiques de la PC-200 sont données dans le tableau ci-dessous.\n\n Paramètre                     Valeur\n Débit maximal               200 m3/h\n Hauteur manométrique max.   45 m\n Puissance moteur            30 kW\n Vitesse de rotation           1450 tr/min\n Pression maximale de service  10 bar\n Température du fluide          -10 °C à +90 °C\n Masse                     185 kg",
+    "images": [],
+    "tableaux": [
+      [
+        [
+          "Paramètre",
+          "Valeur"
+        ],
+        [
+          "Débit maximal",
+          "200 m3/h"
+        ],
+        [
+          "Hauteur manométrique max.",
+          "45 m"
+        ],
+        [
+          "Puissance moteur",
+          "30 kW"
+        ],
+        [
+          "Vitesse de rotation",
+          "1450 tr/min"
+        ],
+        [
+          "Pression maximale de service",
+          "10 bar"
+        ],
+        [
+          "Température du fluide",
+          "-10 °C à +90 °C"
+        ],
+        [
+          "Masse",
+          "185 kg"
+        ]
+      ]
+    ],
+    "tableaux_texte": [
+      "Paramètre | Valeur\nDébit maximal | 200 m3/h\nHauteur manométrique max. | 45 m\nPuissance moteur | 30 kW\nVitesse de rotation | 1450 tr/min\nPression maximale de service | 10 bar\nTempérature du fluide | -10 °C à +90 °C\nMasse | 185 kg"
+    ]
+  },
+  {
+    "famille": "famille_A",
+    "fichier": "fiche_technique_pompe_PC-200.pdf",
+    "page": 2,
+    "texte": "3. Conditions d'utilisation\nLa pompe PC-200 ne doit jamais fonctionner à sec. Le fonctionnement à débit nul pendant plus de\n2 minutes provoque un échauffement du fluide et peut endommager la garniture mécanique.\nLa hauteur d'aspiration (NPSH disponible) doit toujours dépasser le NPSH requis de 0,5 m au\nminimum afin d'éviter la cavitation.",
+    "images": [],
+    "tableaux": [],
+    "tableaux_texte": []
+  },
+  {
+    "famille": "famille_A",
+    "fichier": "guide_depannage_pompes_centrifuges.pdf",
+    "page": 1,
+    "texte": "    Guide de dépannage - Pompes centrifuges\n              (document de test)\n\n1. Tableau de dépannage\nCe guide présente les pannes les plus fréquentes sur les pompes centrifuges et leurs remèdes.\n\n Symptôme               Cause probable                        Remède\n La pompe ne débite pas    Pompe non amorcée ou prise d'air à l'aspiration   Réamorcer, vérifier les joints et la crépine\n Débit insuffisant           Roue usée ou vanne partiellement fermée        Contrôler la roue, ouvrir la vanne\n  Bruit de cailloux (cavitation)  NPSH disponible insuffisant                    Réduire la hauteur d'aspiration, nettoyer la crép\n Fuite à l'arbre                Garniture mécanique usée                    Remplacer la garniture\n Vibrations excessives        Désalignement ou roulement défectueux         Réaligner l'accouplement, changer le roulemen\n Échauffement du moteur     Surcharge ou tension d'alimentation faible        Contrôler l'intensité absorbée et la tension\n2. Consignes de sécurité\nAvant toute intervention, effectuer la consignation électrique et attendre l'arrêt complet de la\npompe. Porter des gants et des lunettes de protection lors de la vidange.",
+    "images": [],
+    "tableaux": [
+      [
+        [
+          "Symptôme",
+          "Cause probable",
+          "Remède",
+          ""
+        ],
+        [
+          "La pompe ne débite pas",
+          "Pompe non amorcée ou prise d'air à l'aspiration",
+          "Réamorcer, vérifier les joints et la crépine",
+          ""
+        ],
+        [
+          "Débit insuffisant",
+          "Roue usée ou vanne partiellement fermée",
+          "Contrôler la roue, ouvrir la vanne",
+          ""
+        ],
+        [
+          "Bruit de cailloux (cavitation)",
+          "NPSH disponible insuffisant",
+          "Réduire la hauteur d'aspiration, nettoyer la crép",
+          ""
+        ],
+        [
+          "Fuite à l'arbre",
+          "Garniture mécanique usée",
+          "Remplacer la garniture",
+          ""
+        ],
+        [
+          "Vibrations excessives",
+          "Désalignement ou roulement défectueux",
+          "Réaligner l'accouplement, changer le roulement",
+          ""
+        ],
+        [
+          "Échauffement du moteur",
+          "Surcharge ou tension d'alimentation faible",
+          "Contrôler l'intensité absorbée et la tension",
+          ""
+        ]
+      ]
+    ],
+    "tableaux_texte": [
+      "Symptôme | Cause probable | Remède | \nLa pompe ne débite pas | Pompe non amorcée ou prise d'air à l'aspiration | Réamorcer, vérifier les joints et la crépine | \nDébit insuffisant | Roue usée ou vanne partiellement fermée | Contrôler la roue, ouvrir la vanne | \nBruit de cailloux (cavitation) | NPSH disponible insuffisant | Réduire la hauteur d'aspiration, nettoyer la crép | \nFuite à l'arbre | Garniture mécanique usée | Remplacer la garniture | \nVibrations excessives | Désalignement ou roulement défectueux | Réaligner l'accouplement, changer le roulement | \nÉchauffement du moteur | Surcharge ou tension d'alimentation faible | Contrôler l'intensité absorbée et la tension | "
+    ]
+  },
+  {
+    "famille": "famille_A",
+    "fichier": "manuel_maintenance_pompe_PC-200.pdf",
+    "page": 1,
+    "texte": "Manuel de maintenance - Pompe centrifuge PC-200\n              (document de test)\n\n1. Maintenance préventive\nUne inspection visuelle doit être réalisée chaque semaine : fuites au niveau de la garniture, bruits\nanormaux, vibrations, température des paliers.\nLe graissage des roulements s'effectue toutes les 2000 heures de fonctionnement avec une graisse\nau lithium de classe NLGI 2.\n\n  Intervention                             Périodicité\n Contrôle visuel et bruit              Hebdomadaire\n Graissage des roulements          2000 h\n Contrôle alignement accouplement    Tous les 6 mois\n Remplacement garniture mécanique  8000 h ou en cas de fuite\n Révision générale                 Tous les 3 ans\n2. Remplacement de la garniture mécanique\nÉtape 1 : consigner l'alimentation électrique et fermer les vannes d'aspiration et de refoulement.\nÉtape 2 : vidanger la pompe et démonter le corps de pompe.\nÉtape 3 : retirer la roue et extraire l'ancienne garniture.\nÉtape 4 : nettoyer l'arbre, monter la nouvelle garniture sans toucher les faces de friction.\nÉtape 5 : remonter, purger l'air et contrôler l'absence de fuite au redémarrage.",
+    "images": [],
+    "tableaux": [
+      [
+        [
+          "Intervention",
+          "Périodicité"
+        ],
+        [
+          "Contrôle visuel et bruit",
+          "Hebdomadaire"
+        ],
+        [
+          "Graissage des roulements",
+          "2000 h"
+        ],
+        [
+          "Contrôle alignement accouplement",
+          "Tous les 6 mois"
+        ],
+        [
+          "Remplacement garniture mécanique",
+          "8000 h ou en cas de fuite"
+        ],
+        [
+          "Révision générale",
+          "Tous les 3 ans"
+        ]
+      ]
+    ],
+    "tableaux_texte": [
+      "Intervention | Périodicité\nContrôle visuel et bruit | Hebdomadaire\nGraissage des roulements | 2000 h\nContrôle alignement accouplement | Tous les 6 mois\nRemplacement garniture mécanique | 8000 h ou en cas de fuite\nRévision générale | Tous les 3 ans"
+    ]
+  },
+  {
+    "famille": "famille_B",
+    "fichier": "fiche_technique_moteur_ME-30.pdf",
+    "page": 1,
+    "texte": "  Fiche technique - Moteur asynchrone triphasé\n          ME-30 (document de test)\n\n1. Présentation\nLe moteur ME-30 est un moteur asynchrone triphasé à cage d'écureuil, fermé et refroidi par\nventilation extérieure (IP55), destiné à l'entraînement de pompes, ventilateurs et convoyeurs.\n2. Caractéristiques électriques\nLes valeurs ci-dessous sont données pour une alimentation 400 V, 50 Hz.\n\n Paramètre             Valeur\n Puissance nominale   30 kW\n Tension             400 V triphasé\n Courant nominal      55 A\n Vitesse nominale      1470 tr/min\n Rendement           IE3 - 93,6 %\n Facteur de puissance   0,86\n Classe d'isolation     F\n Indice de protection    IP55",
+    "images": [],
+    "tableaux": [
+      [
+        [
+          "Paramètre",
+          "Valeur"
+        ],
+        [
+          "Puissance nominale",
+          "30 kW"
+        ],
+        [
+          "Tension",
+          "400 V triphasé"
+        ],
+        [
+          "Courant nominal",
+          "55 A"
+        ],
+        [
+          "Vitesse nominale",
+          "1470 tr/min"
+        ],
+        [
+          "Rendement",
+          "IE3 - 93,6 %"
+        ],
+        [
+          "Facteur de puissance",
+          "0,86"
+        ],
+        [
+          "Classe d'isolation",
+          "F"
+        ],
+        [
+          "Indice de protection",
+          "IP55"
+        ]
+      ]
+    ],
+    "tableaux_texte": [
+      "Paramètre | Valeur\nPuissance nominale | 30 kW\nTension | 400 V triphasé\nCourant nominal | 55 A\nVitesse nominale | 1470 tr/min\nRendement | IE3 - 93,6 %\nFacteur de puissance | 0,86\nClasse d'isolation | F\nIndice de protection | IP55"
+    ]
+  },
+  {
+    "famille": "famille_B",
+    "fichier": "fiche_technique_moteur_ME-30.pdf",
+    "page": 2,
+    "texte": "3. Conditions d'utilisation\nTempérature ambiante maximale : 40 °C. Au-delà, il faut déclasser la puissance. Le nombre de\ndémarrages est limité à 6 par heure pour éviter l'échauffement des enroulements.",
+    "images": [],
+    "tableaux": [],
+    "tableaux_texte": []
+  },
+  {
+    "famille": "famille_B",
+    "fichier": "guide_depannage_moteurs_electriques.pdf",
+    "page": 1,
+    "texte": "    Guide de dépannage - Moteurs électriques\n              (document de test)\n\n1. Tableau de dépannage\nCe guide recense les défauts courants des moteurs asynchrones triphasés.\n\n Symptôme                     Cause probable                      Remède\n Le moteur ne démarre pas           Fusible grillé ou contacteur défectueux         Vérifier les fusibles et le contacteur\n Déclenchement du relais thermique   Surcharge mécanique ou phase manquante   Mesurer le courant sur chaque phase\n Échauffement anormal                Ventilation obstruée ou surcharge            Nettoyer les ailettes, vérifier la charge\n  Bruit de roulement                 Roulement usé ou manque de graisse        Regraisser ou remplacer le roulement\n Vibrations                          Balourd ou désalignement                      Équilibrer le rotor, réaligner l'accouplement\n Isolement faible                    Humidité ou bobinage vieillissant            Sécher le moteur, contrôler le bobinage\n2. Sécurité\nToute intervention sur un moteur impose la consignation électrique, la vérification d'absence de\ntension et le port des équipements de protection individuelle.",
+    "images": [],
+    "tableaux": [
+      [
+        [
+          "Symptôme",
+          "Cause probable"
+        ],
+        [
+          "Le moteur ne démarre pas",
+          "Fusible grillé ou contacteur défectueux"
+        ],
+        [
+          "Déclenchement du relais thermique",
+          "Surcharge mécanique ou phase manquante"
+        ],
+        [
+          "Échauffement anormal",
+          "Ventilation obstruée ou surcharge"
+        ],
+        [
+          "Bruit de roulement",
+          "Roulement usé ou manque de graisse"
+        ],
+        [
+          "Vibrations",
+          "Balourd ou désalignement"
+        ],
+        [
+          "Isolement faible",
+          "Humidité ou bobinage vieillissant"
+        ]
+      ]
+    ],
+    "tableaux_texte": [
+      "Symptôme | Cause probable\nLe moteur ne démarre pas | Fusible grillé ou contacteur défectueux\nDéclenchement du relais thermique | Surcharge mécanique ou phase manquante\nÉchauffement anormal | Ventilation obstruée ou surcharge\nBruit de roulement | Roulement usé ou manque de graisse\nVibrations | Balourd ou désalignement\nIsolement faible | Humidité ou bobinage vieillissant"
+    ]
+  },
+  {
+    "famille": "famille_B",
+    "fichier": "manuel_maintenance_moteur_ME-30.pdf",
+    "page": 1,
+    "texte": "Manuel de maintenance - Moteur ME-30 (document\n                  de test)\n\n1. Maintenance préventive\nContrôler chaque mois la température du carter, le bruit et les vibrations. Nettoyer les ailettes de\nrefroidissement pour garantir l'évacuation de la chaleur.\nLes roulements doivent être regraissés toutes les 4000 heures avec une graisse polyurée.\n\n  Intervention                             Périodicité\n Contrôle vibrations et température    Mensuel\n Nettoyage des ailettes              Tous les 3 mois\n Regraissage des roulements        4000 h\n Mesure isolement des enroulements   Annuelle\n Remplacement des roulements      20000 h environ\n2. Mesure d'isolement\nAvec un mégohmmètre sous 500 V, mesurer l'isolement entre chaque phase et la masse. La valeur\ndoit être supérieure à 10 mégohms. En dessous de 1 mégohm, le moteur ne doit pas être remis en\nservice et le bobinage doit être séché ou refait.",
+    "images": [],
+    "tableaux": [
+      [
+        [
+          "Intervention",
+          "Périodicité"
+        ],
+        [
+          "Contrôle vibrations et température",
+          "Mensuel"
+        ],
+        [
+          "Nettoyage des ailettes",
+          "Tous les 3 mois"
+        ],
+        [
+          "Regraissage des roulements",
+          "4000 h"
+        ],
+        [
+          "Mesure isolement des enroulements",
+          "Annuelle"
+        ],
+        [
+          "Remplacement des roulements",
+          "20000 h environ"
+        ]
+      ]
+    ],
+    "tableaux_texte": [
+      "Intervention | Périodicité\nContrôle vibrations et température | Mensuel\nNettoyage des ailettes | Tous les 3 mois\nRegraissage des roulements | 4000 h\nMesure isolement des enroulements | Annuelle\nRemplacement des roulements | 20000 h environ"
+    ]
+  }
+]

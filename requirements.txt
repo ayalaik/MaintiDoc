@@ -1,0 +1,6 @@
+streamlit
+llama-index
+langchain
+langchain-community
+psycopg2-binary
+requests
