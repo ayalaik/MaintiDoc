@@ -1,5 +1,5 @@
 # Environnement virtuel et caches
-.venv/
+.venv*/
 __pycache__/
 *.pyc
 .vscode/
