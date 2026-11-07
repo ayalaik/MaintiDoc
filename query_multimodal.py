@@ -1,11 +1,13 @@
 
-from llama_index.core import Settings, VectorStoreIndex
-from llama_index.core import PromptTemplate
+from llama_index.core import Settings, VectorStoreIndex, PromptTemplate
 from llama_index.embeddings.ollama import OllamaEmbedding
 from llama_index.llms.ollama import Ollama
 from llama_index.vector_stores.postgres import PGVectorStore
 
-# Configuration
+# ==========================================
+# 1. CONFIGURATION
+# ==========================================
+
 DB = dict(
     host="localhost",
     port=5432,
@@ -16,6 +18,7 @@ DB = dict(
 
 EMBED_DIM = 768
 TOP_K = 3
+MAX_RESULTATS = 4
 
 Settings.embed_model = OllamaEmbedding(
     model_name="nomic-embed-text"
@@ -27,7 +30,10 @@ Settings.llm = Ollama(
     temperature=0.1
 )
 
-# Connexion aux deux tables
+# ==========================================
+# 2. CONNEXION AUX BASES VECTORIELLES
+# ==========================================
+
 store_textes = PGVectorStore.from_params(
     **DB,
     table_name="chunks",
@@ -48,6 +54,10 @@ index_tableaux = VectorStoreIndex.from_vector_store(
     store_tableaux
 )
 
+# ==========================================
+# 3. CONFIGURATION DES RETRIEVERS
+# ==========================================
+
 retriever_textes = index_textes.as_retriever(
     similarity_top_k=TOP_K
 )
@@ -55,6 +65,10 @@ retriever_textes = index_textes.as_retriever(
 retriever_tableaux = index_tableaux.as_retriever(
     similarity_top_k=TOP_K
 )
+
+# ==========================================
+# 4. PROMPT DU MODELE
+# ==========================================
 
 PROMPT = PromptTemplate(
     "Tu es MaintiDoc, un assistant de maintenance industrielle.\n"
@@ -67,9 +81,15 @@ PROMPT = PromptTemplate(
     "Réponse :"
 )
 
+# ==========================================
+# 5. BOUCLE PRINCIPALE
+# ==========================================
+
 print("MaintiDoc multimodal prêt !")
+print("Tape 'q' pour quitter.")
 
 while True:
+
     question = input("\nQuestion > ").strip()
 
     if question.lower() in {"q", "quit", "exit"}:
@@ -78,29 +98,66 @@ while True:
     if not question:
         continue
 
-    # Recherche dans les textes et les tableaux
+    # --------------------------------------
+    # A. Recherche dans les deux index
+    # --------------------------------------
+
     resultats_textes = retriever_textes.retrieve(question)
     resultats_tableaux = retriever_tableaux.retrieve(question)
 
-    # Fusion et suppression des doublons
+    # --------------------------------------
+    # B. Identification du type de source
+    # --------------------------------------
+
+    for resultat in resultats_textes:
+        resultat.node.metadata["type_source"] = "Texte"
+
+    for resultat in resultats_tableaux:
+        resultat.node.metadata["type_source"] = "Tableau"
+
+    # --------------------------------------
+    # C. Fusion et suppression des doublons
+    # --------------------------------------
+
     resultats = []
     ids_vus = set()
 
     for resultat in resultats_textes + resultats_tableaux:
+
         identifiant = resultat.node.node_id
+
         if identifiant not in ids_vus:
             ids_vus.add(identifiant)
             resultats.append(resultat)
 
-    # Construction du contexte
+    # --------------------------------------
+    # D. Classement par similarité
+    # --------------------------------------
+
+    resultats.sort(
+        key=lambda r: r.score if r.score is not None else 0,
+        reverse=True
+    )
+
+    # Garder uniquement les 4 meilleurs résultats
+    resultats = resultats[:MAX_RESULTATS]
+
+    # --------------------------------------
+    # E. Construction du contexte
+    # --------------------------------------
+
     contexte = "\n\n".join(
+        f"Type : {r.node.metadata.get('type_source', 'Inconnu')}\n"
         f"Document : {r.node.metadata.get('fichier', 'inconnu')}\n"
         f"Page : {r.node.metadata.get('page', '?')}\n"
         f"Contenu : {r.node.text}"
         for r in resultats
     )
 
-    # Génération de la réponse
+    # --------------------------------------
+    # F. Génération de la réponse
+    # --------------------------------------
+
     prompt_final = PROMPT.format(
         context_str=contexte,
         query_str=question
@@ -111,14 +168,32 @@ while True:
     print("\nRéponse :")
     print(reponse.text)
 
+    # --------------------------------------
+    # G. Affichage des sources
+    # --------------------------------------
+
     print("\nSources :")
+
+    if not resultats:
+        print("Aucune source trouvée.")
+
     for r in resultats:
+
         m = r.node.metadata
-        print(
-            f"- {m.get('famille', '?')} / "
-            f"{m.get('fichier', '?')} "
-            f"(page {m.get('page', '?')}) "
-            f"- score {r.score:.2f}"
+
+        type_source = m.get("type_source", "Inconnu")
+        famille = m.get("famille", "?")
+        fichier = m.get("fichier", "?")
+        page = m.get("page", "?")
+
+        score = (
+            f"{r.score:.2f}"
             if r.score is not None
-            else f"- {m.get('fichier', '?')}"
+            else "N/A"
+        )
+
+        print(
+            f"- [{type_source}] "
+            f"{famille} / {fichier} "
+            f"(page {page}) - score {score}"
         )
