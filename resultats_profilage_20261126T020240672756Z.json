@@ -1,0 +1,358 @@
+{
+    "debut_utc": "2026-11-26T02:02:40.672756+00:00",
+    "repetitions": 2,
+    "metriques": {
+        "nombre_tests": 8,
+        "reponses_correctes": 8,
+        "accuracy": 100.0,
+        "hit_rate_at_4": 100.0,
+        "temps_moyen_secondes": 45.62,
+        "temps_median_secondes": 36.08
+    },
+    "resultats": [
+        {
+            "passage": 1,
+            "id": 1,
+            "question": "Quelle est la puissance nominale du moteur ME-30 ?",
+            "type": "tableau",
+            "reponse_attendue": "30 kW",
+            "reponse_generee": "La puissance nominale du moteur ME-30 est de 30 kW.",
+            "reponse_correcte": true,
+            "document_attendu": "fiche_technique_moteur_ME-30.pdf",
+            "source_correcte": true,
+            "sources": [
+                "manuel_maintenance_moteur_ME-30.pdf",
+                "fiche_technique_moteur_ME-30.pdf",
+                "fiche_technique_moteur_ME-30.pdf",
+                "manuel_maintenance_moteur_ME-30.pdf"
+            ],
+            "temps_reponse": 146.958562,
+            "profil": {
+                "recherche_texte": {
+                    "total_secondes": 4.034333,
+                    "appels_embedding": 1,
+                    "embedding_secondes": 3.79208,
+                    "recuperation_hors_embedding_secondes": 0.242253
+                },
+                "recherche_tableaux": {
+                    "total_secondes": 0.192569,
+                    "appels_embedding": 1,
+                    "embedding_secondes": 0.10766,
+                    "recuperation_hors_embedding_secondes": 0.084909
+                },
+                "preparation_contexte_secondes": 0.00033,
+                "generation_secondes": 142.729602,
+                "taille_prompt_caracteres": 2928,
+                "ollama": {
+                    "total_nanosecondes": 139455266700,
+                    "chargement_nanosecondes": 92278118400,
+                    "traitement_prompt_nanosecondes": 41431085000,
+                    "generation_jetons_nanosecondes": 4600615000,
+                    "jetons_prompt": 940,
+                    "jetons_generes": 18
+                }
+            }
+        },
+        {
+            "passage": 1,
+            "id": 2,
+            "question": "Quel est le débit maximal de la pompe PC-200 ?",
+            "type": "tableau",
+            "reponse_attendue": "200 m3/h",
+            "reponse_generee": "Selon le document fiche_technique_pompe_PC-200.pdf, page 1, le débit maximal de la pompe PC-200 est de 200 m3/h.",
+            "reponse_correcte": true,
+            "document_attendu": "fiche_technique_pompe_PC-200.pdf",
+            "source_correcte": true,
+            "sources": [
+                "fiche_technique_pompe_PC-200.pdf",
+                "fiche_technique_pompe_PC-200.pdf",
+                "fiche_technique_pompe_PC-200.pdf",
+                "manuel_maintenance_pompe_PC-200.pdf"
+            ],
+            "temps_reponse": 52.070234,
+            "profil": {
+                "recherche_texte": {
+                    "total_secondes": 5.693527,
+                    "appels_embedding": 1,
+                    "embedding_secondes": 4.733659,
+                    "recuperation_hors_embedding_secondes": 0.959868
+                },
+                "recherche_tableaux": {
+                    "total_secondes": 0.325424,
+                    "appels_embedding": 1,
+                    "embedding_secondes": 0.203284,
+                    "recuperation_hors_embedding_secondes": 0.122141
+                },
+                "preparation_contexte_secondes": 0.005345,
+                "generation_secondes": 46.039159,
+                "taille_prompt_caracteres": 3052,
+                "ollama": {
+                    "total_nanosecondes": 43679292900,
+                    "chargement_nanosecondes": 27091300,
+                    "traitement_prompt_nanosecondes": 33789374000,
+                    "generation_jetons_nanosecondes": 9533470000,
+                    "jetons_prompt": 952,
+                    "jetons_generes": 41
+                }
+            }
+        },
+        {
+            "passage": 1,
+            "id": 3,
+            "question": "Quelle est la périodicité de regraissage des roulements du moteur ME-30 ?",
+            "type": "maintenance",
+            "reponse_attendue": "4000 heures",
+            "reponse_generee": "Selon le tableau 1 du document Manuel de maintenance - Moteur ME-30 (page 1), la périodicité de regraissage des roulements est de 4000 heures.",
+            "reponse_correcte": true,
+            "document_attendu": "manuel_maintenance_moteur_ME-30.pdf",
+            "source_correcte": true,
+            "sources": [
+                "manuel_maintenance_moteur_ME-30.pdf",
+                "manuel_maintenance_moteur_ME-30.pdf",
+                "fiche_technique_moteur_ME-30.pdf",
+                "guide_depannage_moteurs_electriques.pdf"
+            ],
+            "temps_reponse": 36.692595,
+            "profil": {
+                "recherche_texte": {
+                    "total_secondes": 2.536584,
+                    "appels_embedding": 1,
+                    "embedding_secondes": 2.501742,
+                    "recuperation_hors_embedding_secondes": 0.034842
+                },
+                "recherche_tableaux": {
+                    "total_secondes": 0.179881,
+                    "appels_embedding": 1,
+                    "embedding_secondes": 0.161692,
+                    "recuperation_hors_embedding_secondes": 0.018189
+                },
+                "preparation_contexte_secondes": 0.000943,
+                "generation_secondes": 33.974907,
+                "taille_prompt_caracteres": 3465,
+                "ollama": {
+                    "total_nanosecondes": 33919987800,
+                    "chargement_nanosecondes": 13468700,
+                    "traitement_prompt_nanosecondes": 26796366000,
+                    "generation_jetons_nanosecondes": 6915714000,
+                    "jetons_prompt": 1075,
+                    "jetons_generes": 43
+                }
+            }
+        },
+        {
+            "passage": 1,
+            "id": 4,
+            "question": "Quelle est la date exacte de fabrication de la pompe PC-200 ?",
+            "type": "absence_information",
+            "reponse_attendue": "Je ne trouve pas cette information dans les documents.",
+            "reponse_generee": "Je ne trouve pas cette information dans les documents fournis.",
+            "reponse_correcte": true,
+            "document_attendu": null,
+            "source_correcte": null,
+            "sources": [
+                "fiche_technique_pompe_PC-200.pdf",
+                "fiche_technique_pompe_PC-200.pdf",
+                "manuel_maintenance_pompe_PC-200.pdf",
+                "fiche_technique_pompe_PC-200.pdf"
+            ],
+            "temps_reponse": 35.468009,
+            "profil": {
+                "recherche_texte": {
+                    "total_secondes": 2.277527,
+                    "appels_embedding": 1,
+                    "embedding_secondes": 2.223155,
+                    "recuperation_hors_embedding_secondes": 0.054372
+                },
+                "recherche_tableaux": {
+                    "total_secondes": 0.134708,
+                    "appels_embedding": 1,
+                    "embedding_secondes": 0.118427,
+                    "recuperation_hors_embedding_secondes": 0.016281
+                },
+                "preparation_contexte_secondes": 0.000163,
+                "generation_secondes": 33.055353,
+                "taille_prompt_caracteres": 3067,
+                "ollama": {
+                    "total_nanosecondes": 33032918800,
+                    "chargement_nanosecondes": 14003300,
+                    "traitement_prompt_nanosecondes": 30680151000,
+                    "generation_jetons_nanosecondes": 2249411000,
+                    "jetons_prompt": 954,
+                    "jetons_generes": 13
+                }
+            }
+        },
+        {
+            "passage": 2,
+            "id": 1,
+            "question": "Quelle est la puissance nominale du moteur ME-30 ?",
+            "type": "tableau",
+            "reponse_attendue": "30 kW",
+            "reponse_generee": "La puissance nominale du moteur ME-30 est de 30 kW.",
+            "reponse_correcte": true,
+            "document_attendu": "fiche_technique_moteur_ME-30.pdf",
+            "source_correcte": true,
+            "sources": [
+                "manuel_maintenance_moteur_ME-30.pdf",
+                "fiche_technique_moteur_ME-30.pdf",
+                "fiche_technique_moteur_ME-30.pdf",
+                "manuel_maintenance_moteur_ME-30.pdf"
+            ],
+            "temps_reponse": 29.844725,
+            "profil": {
+                "recherche_texte": {
+                    "total_secondes": 2.209229,
+                    "appels_embedding": 1,
+                    "embedding_secondes": 2.194027,
+                    "recuperation_hors_embedding_secondes": 0.015201
+                },
+                "recherche_tableaux": {
+                    "total_secondes": 0.115667,
+                    "appels_embedding": 1,
+                    "embedding_secondes": 0.101279,
+                    "recuperation_hors_embedding_secondes": 0.014388
+                },
+                "preparation_contexte_secondes": 0.000571,
+                "generation_secondes": 27.519027,
+                "taille_prompt_caracteres": 2928,
+                "ollama": {
+                    "total_nanosecondes": 27489802800,
+                    "chargement_nanosecondes": 20017900,
+                    "traitement_prompt_nanosecondes": 23783222000,
+                    "generation_jetons_nanosecondes": 3553606000,
+                    "jetons_prompt": 940,
+                    "jetons_generes": 18
+                }
+            }
+        },
+        {
+            "passage": 2,
+            "id": 2,
+            "question": "Quel est le débit maximal de la pompe PC-200 ?",
+            "type": "tableau",
+            "reponse_attendue": "200 m3/h",
+            "reponse_generee": "Selon le tableau 1 de la fiche technique, le débit maximal de la pompe PC-200 est de 200 m3/h.",
+            "reponse_correcte": true,
+            "document_attendu": "fiche_technique_pompe_PC-200.pdf",
+            "source_correcte": true,
+            "sources": [
+                "fiche_technique_pompe_PC-200.pdf",
+                "fiche_technique_pompe_PC-200.pdf",
+                "fiche_technique_pompe_PC-200.pdf",
+                "manuel_maintenance_pompe_PC-200.pdf"
+            ],
+            "temps_reponse": 10.350266,
+            "profil": {
+                "recherche_texte": {
+                    "total_secondes": 2.206989,
+                    "appels_embedding": 1,
+                    "embedding_secondes": 2.19036,
+                    "recuperation_hors_embedding_secondes": 0.016629
+                },
+                "recherche_tableaux": {
+                    "total_secondes": 0.156294,
+                    "appels_embedding": 1,
+                    "embedding_secondes": 0.144961,
+                    "recuperation_hors_embedding_secondes": 0.011333
+                },
+                "preparation_contexte_secondes": 0.000158,
+                "generation_secondes": 7.986593,
+                "taille_prompt_caracteres": 3052,
+                "ollama": {
+                    "total_nanosecondes": 7961479000,
+                    "chargement_nanosecondes": 10352600,
+                    "traitement_prompt_nanosecondes": 356389000,
+                    "generation_jetons_nanosecondes": 7460087000,
+                    "jetons_prompt": 952,
+                    "jetons_generes": 32
+                }
+            }
+        },
+        {
+            "passage": 2,
+            "id": 3,
+            "question": "Quelle est la périodicité de regraissage des roulements du moteur ME-30 ?",
+            "type": "maintenance",
+            "reponse_attendue": "4000 heures",
+            "reponse_generee": "Selon le tableau 1 du document \"manuel de maintenance - Moteur ME-30 (document de test)\", la périodicité de regraissage des roulements est de 4000 heures.",
+            "reponse_correcte": true,
+            "document_attendu": "manuel_maintenance_moteur_ME-30.pdf",
+            "source_correcte": true,
+            "sources": [
+                "manuel_maintenance_moteur_ME-30.pdf",
+                "manuel_maintenance_moteur_ME-30.pdf",
+                "fiche_technique_moteur_ME-30.pdf",
+                "guide_depannage_moteurs_electriques.pdf"
+            ],
+            "temps_reponse": 40.552292,
+            "profil": {
+                "recherche_texte": {
+                    "total_secondes": 2.312904,
+                    "appels_embedding": 1,
+                    "embedding_secondes": 2.292726,
+                    "recuperation_hors_embedding_secondes": 0.020179
+                },
+                "recherche_tableaux": {
+                    "total_secondes": 0.517294,
+                    "appels_embedding": 1,
+                    "embedding_secondes": 0.424339,
+                    "recuperation_hors_embedding_secondes": 0.092955
+                },
+                "preparation_contexte_secondes": 0.000329,
+                "generation_secondes": 37.721536,
+                "taille_prompt_caracteres": 3465,
+                "ollama": {
+                    "total_nanosecondes": 37697912700,
+                    "chargement_nanosecondes": 25353500,
+                    "traitement_prompt_nanosecondes": 29729477000,
+                    "generation_jetons_nanosecondes": 7783450000,
+                    "jetons_prompt": 1075,
+                    "jetons_generes": 45
+                }
+            }
+        },
+        {
+            "passage": 2,
+            "id": 4,
+            "question": "Quelle est la date exacte de fabrication de la pompe PC-200 ?",
+            "type": "absence_information",
+            "reponse_attendue": "Je ne trouve pas cette information dans les documents.",
+            "reponse_generee": "Je ne trouve pas cette information dans les documents fournis. La date exacte de fabrication de la pompe PC-200 n'est pas mentionnée dans la fiche technique, le manuel de maintenance ou les autres documents fournis.",
+            "reponse_correcte": true,
+            "document_attendu": null,
+            "source_correcte": null,
+            "sources": [
+                "fiche_technique_pompe_PC-200.pdf",
+                "fiche_technique_pompe_PC-200.pdf",
+                "manuel_maintenance_pompe_PC-200.pdf",
+                "fiche_technique_pompe_PC-200.pdf"
+            ],
+            "temps_reponse": 13.039906,
+            "profil": {
+                "recherche_texte": {
+                    "total_secondes": 2.219357,
+                    "appels_embedding": 1,
+                    "embedding_secondes": 2.205917,
+                    "recuperation_hors_embedding_secondes": 0.01344
+                },
+                "recherche_tableaux": {
+                    "total_secondes": 0.134969,
+                    "appels_embedding": 1,
+                    "embedding_secondes": 0.122695,
+                    "recuperation_hors_embedding_secondes": 0.012274
+                },
+                "preparation_contexte_secondes": 0.000217,
+                "generation_secondes": 10.685057,
+                "taille_prompt_caracteres": 3067,
+                "ollama": {
+                    "total_nanosecondes": 10661587700,
+                    "chargement_nanosecondes": 14411200,
+                    "traitement_prompt_nanosecondes": 451635000,
+                    "generation_jetons_nanosecondes": 10059894000,
+                    "jetons_prompt": 954,
+                    "jetons_generes": 50
+                }
+            }
+        }
+    ]
+}

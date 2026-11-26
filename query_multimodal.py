@@ -26,6 +26,7 @@ Settings.embed_model = OllamaEmbedding(
 
 Settings.llm = Ollama(
     model="llama3.2:3b",
+    context_window=4096,
     request_timeout=300.0,
     temperature=0.1
 )
@@ -85,19 +86,7 @@ PROMPT = PromptTemplate(
 # 5. BOUCLE PRINCIPALE
 # ==========================================
 
-print("MaintiDoc multimodal prêt !")
-print("Tape 'q' pour quitter.")
-
-while True:
-
-    question = input("\nQuestion > ").strip()
-
-    if question.lower() in {"q", "quit", "exit"}:
-        break
-
-    if not question:
-        continue
-
+def poser_question(question):
     # --------------------------------------
     # A. Recherche dans les deux index
     # --------------------------------------
@@ -165,35 +154,66 @@ while True:
 
     reponse = Settings.llm.complete(prompt_final)
 
-    print("\nRéponse :")
-    print(reponse.text)
+    sources = [
+        {
+            "type_source": r.node.metadata.get("type_source", "Inconnu"),
+            "famille": r.node.metadata.get("famille", "?"),
+            "fichier": r.node.metadata.get("fichier", "?"),
+            "page": r.node.metadata.get("page", "?"),
+            "score": r.score,
+        }
+        for r in resultats
+    ]
+    return reponse.text, sources
 
-    # --------------------------------------
-    # G. Affichage des sources
-    # --------------------------------------
 
-    print("\nSources :")
+def main():
+    print("MaintiDoc multimodal prêt !")
+    print("Tape 'q' pour quitter.")
 
-    if not resultats:
-        print("Aucune source trouvée.")
+    while True:
 
-    for r in resultats:
+        question = input("\nQuestion > ").strip()
 
-        m = r.node.metadata
+        if question.lower() in {"q", "quit", "exit"}:
+            break
 
-        type_source = m.get("type_source", "Inconnu")
-        famille = m.get("famille", "?")
-        fichier = m.get("fichier", "?")
-        page = m.get("page", "?")
+        if not question:
+            continue
 
-        score = (
-            f"{r.score:.2f}"
-            if r.score is not None
-            else "N/A"
-        )
+        reponse, resultats = poser_question(question)
 
-        print(
-            f"- [{type_source}] "
-            f"{famille} / {fichier} "
-            f"(page {page}) - score {score}"
-        )
+        print("\nRéponse :")
+        print(reponse)
+
+        # --------------------------------------
+        # G. Affichage des sources
+        # --------------------------------------
+
+        print("\nSources :")
+
+        if not resultats:
+            print("Aucune source trouvée.")
+
+        for m in resultats:
+
+            type_source = m.get("type_source", "Inconnu")
+            famille = m.get("famille", "?")
+            fichier = m.get("fichier", "?")
+            page = m.get("page", "?")
+
+            score = (
+                f"{m['score']:.2f}"
+                if m["score"] is not None
+                else "N/A"
+            )
+
+            print(
+                f"- [{type_source}] "
+                f"{famille} / {fichier} "
+                f"(page {page}) - score {score}"
+            )
+
+
+if __name__ == "__main__":
+    main()
