@@ -1,7 +1,7 @@
-chemin,document_id,version,groupes_autorises
-famille_A/fiche_technique_pompe_PC-200.pdf,pompe-pc200-fiche,demo-1,demo_pompes
-famille_A/guide_depannage_pompes_centrifuges.pdf,pompes-centrifuges-guide,demo-1,demo_pompes
-famille_A/manuel_maintenance_pompe_PC-200.pdf,pompe-pc200-manuel,demo-1,demo_pompes
-famille_B/fiche_technique_moteur_ME-30.pdf,moteur-me30-fiche,demo-1,demo_moteurs
-famille_B/guide_depannage_moteurs_electriques.pdf,moteurs-electriques-guide,demo-1,demo_moteurs
-famille_B/manuel_maintenance_moteur_ME-30.pdf,moteur-me30-manuel,demo-1,demo_moteurs
+chemin,document_id,version,groupes_autorises,alias
+famille_A/001087043fr_b_02_2025_e-she_e-shs_hydrovarx.pdf,xylem-hydrovar-x-001087043fr,B-2025-02,demo_pompes,Xylem;hydrovar X;e-SHE;e-SHS;001087043fr
+famille_A/96528411_12_2023_NB__NBG__TP__TPD_PUBTYPE_FR_online.pdf,grundfos-atex-96528411,2023-12,demo_pompes,Grundfos;96528411
+famille_A/Grundfos_NB_NBG_TP_TPD_ATEX_FR.pdf,grundfos-atex-96528411-copie,2023-12,demo_pompes,Grundfos;96528411
+famille_B/1889_fr-en-de-es-it-pt-nl-sv-da-fi-ru-no-ja-zh-cs-tr-ko-el-ar-hu-pl-et-lt-lv-sk-sl.pdf,leroy-somer-1889,2019-03,demo_moteurs,Leroy-Somer;LSES;FLSES;PLSES
+famille_B/3GZF500730-85 Rev H FR_05.2022_LQP.pdf,abb-3gzf500730-85,H,demo_moteurs,ABB;3GZF500730-85
+famille_B/WEG-WMO-manuel-d-installation-d-utilisation-et-de-maintenance-de-moteurs-electriques-50069265-manuel-french-web.pdf,weg-wmo-50069265,edition-50033244,demo_moteurs,WEG;50069265;50033244

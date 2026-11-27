@@ -20,7 +20,8 @@ def lire_metadonnees(corpus: Path) -> dict:
     with inventaire.open(encoding="utf-8-sig", newline="") as fichier:
         lignes = csv.DictReader(fichier)
         champs = {"chemin", "document_id", "version", "groupes_autorises"}
-        if set(lignes.fieldnames or []) != champs:
+        colonnes = set(lignes.fieldnames or [])
+        if colonnes not in (champs, champs | {"alias"}):
             raise ValueError(f"Colonnes invalides dans {inventaire}.")
 
         for numero, ligne in enumerate(lignes, start=2):
@@ -28,6 +29,7 @@ def lire_metadonnees(corpus: Path) -> dict:
             identifiant = (ligne["document_id"] or "").strip()
             version = (ligne["version"] or "").strip()
             groupes = [g.strip() for g in (ligne["groupes_autorises"] or "").split(";")]
+            alias = [a.strip() for a in (ligne.get("alias") or "").split(";") if a.strip()]
             if None in ligne or not (chemin and identifiant and version and all(groupes)):
                 raise ValueError(f"Métadonnées incomplètes dans {inventaire}, ligne {numero}.")
             if chemin in fiches or identifiant in identifiants:
@@ -36,6 +38,7 @@ def lire_metadonnees(corpus: Path) -> dict:
                 "document_id": identifiant,
                 "version": version,
                 "groupes_autorises": list(dict.fromkeys(groupes)),
+                "alias": alias,
             }
             identifiants.add(identifiant)
     return fiches

@@ -1,8 +1,10 @@
+from urllib.parse import quote
+
 import requests
 import streamlit as st
 
 
-URL_API = "http://127.0.0.1:8000/questions"
+URL_API = "http://127.0.0.1:8000"
 
 st.set_page_config(page_title="MaintiDoc")
 st.title("MaintiDoc")
@@ -13,6 +15,10 @@ with st.sidebar:
 
 with st.form("question"):
     question = st.text_area("Question de maintenance", max_chars=2000)
+    apercu_source = st.selectbox(
+        "Aperçu des sources",
+        ["Aucun", "Page entière", "Figure seule"],
+    )
     soumise = st.form_submit_button("Rechercher", type="primary")
 
 if soumise:
@@ -27,7 +33,7 @@ if soumise:
     try:
         with st.spinner("Recherche dans les manuels et génération de la réponse…"):
             resultat = requests.post(
-                URL_API, json={"question": question}, auth=(profil, mot_de_passe), timeout=(5, 330),
+                f"{URL_API}/questions", json={"question": question}, auth=(profil, mot_de_passe), timeout=(5, 330),
             )
             resultat.raise_for_status()
             donnees = resultat.json()
@@ -51,8 +57,33 @@ if soumise:
     st.subheader("Sources retrouvées")
     if not donnees["sources"]:
         st.info("Aucune source retrouvée.")
+    pages_affichees = set()
+    mode = "figure" if apercu_source == "Figure seule" else "page"
     for source in donnees["sources"]:
         st.text(
             f"{source['famille']} / {source['fichier']} — "
             f"page {source['page']} ({source['type_source']})"
         )
+        page = str(source["page"])
+        cle = (source["document_id"], page)
+        if apercu_source == "Aucun" or not page.isascii() or not page.isdecimal() or cle in pages_affichees:
+            continue
+        pages_affichees.add(cle)
+        identifiant = quote(source["document_id"], safe="")
+        try:
+            apercu = requests.get(
+                f"{URL_API}/documents/{identifiant}/pages/{page}",
+                params={"mode": mode},
+                auth=(profil, mot_de_passe), timeout=(5, 15),
+            )
+            if (
+                mode == "figure" and apercu.status_code == 404
+                and apercu.json().get("detail") == "Aucune figure intégrée sur cette page."
+            ):
+                st.caption(f"Aucune figure intégrée trouvée à la page {page}.")
+                continue
+            apercu.raise_for_status()
+        except requests.RequestException:
+            st.warning(f"Aperçu indisponible pour {source['fichier']}, page {page}.")
+            continue
+        st.image(apercu.content, caption=f"{source['fichier']} · page {page}")

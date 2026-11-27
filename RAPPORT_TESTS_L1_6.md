@@ -50,3 +50,16 @@ Les six scénarios ci-dessus réussissent dans l’environnement local de démon
 | L1.4 | [FastAPI](api.py) et [chaîne RAG](query_multimodal.py) |
 | L1.5 | [Interface Streamlit](interface.py) et [instructions de lancement](README.md#10-exécution-et-tests) |
 | L1.6 | Rapport et captures ci-dessus |
+
+## Retest de l’abstention sur le corpus constructeur
+
+Le 28 novembre 2026, les deux questions ont été rejouées dans FastAPI avec Qdrant et Ollama réels. L’abstention a aussi été vérifiée dans Streamlit avec FastAPI en test automatisé.
+
+| Question | Profil autorisé | Autre profil |
+| --- | --- | --- |
+| Plage de température de stockage de l’unité emballée Xylem hydrovar X | `demo_pompes` · −5 °C à +40 °C, manuel Xylem, page 9 parmi les sources. | `demo_moteurs` · abstention, aucune source. |
+| Altitude maximale selon la section 5.1 du manuel ABB 3GZF500730-85 | `demo_moteurs` · 1 000 m, manuel ABB, page 14 parmi les sources. | `demo_pompes` · abstention, aucune source. |
+
+Les routes PDF et aperçu des deux manuels ont renvoyé HTTP 200 avec le profil autorisé, HTTP 403 avec l’autre profil et HTTP 401 sans identifiants. Le test Streamlit a vérifié l’affichage de l’abstention et l’absence d’appel au moteur documentaire pour les deux références interdites.
+
+FastAPI compare les références explicites aux identifiants, noms de fichiers et alias de l’[inventaire](corpus/metadata.csv). Une référence reconnue restreint la recherche aux documents correspondants et déclenche l’abstention si le profil ne peut pas les consulter. Les formulations qui ne correspondent à aucune référence inventoriée continuent à utiliser le RAG dans le périmètre du profil.
