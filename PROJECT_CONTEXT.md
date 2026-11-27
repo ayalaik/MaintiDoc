@@ -6,7 +6,11 @@ MaintiDoc est un prototype local d’assistant documentaire pour la maintenance 
 
 Le corpus de démonstration contient six PDF. `famille_A` couvre la pompe centrifuge PC-200 et `famille_B` le moteur ME-30. Chaque famille comprend une fiche technique, un manuel de maintenance et un guide de dépannage. Le README rapporte 8 passages et 6 tableaux indexés lors de tests antérieurs. Ces volumes décrivent le jeu de démonstration.
 
-## Architecture actuelle
+## Parcours V1
+
+[index_qdrant.py](index_qdrant.py) extrait les PDF avec PyMuPDF et indexe le texte et les tableaux dans Qdrant avec BGE-M3 via Ollama. [query_multimodal.py](query_multimodal.py) relie la recherche vectorielle à la génération locale avec LangChain. FastAPI et Streamlit utilisent cette chaîne. Voir [les commandes de la V1](README.md#10-exécution-et-tests).
+
+## Architecture du prototype historique
 
 | Étape | Implémentation |
 | --- | --- |
@@ -21,11 +25,11 @@ Le corpus de démonstration contient six PDF. `famille_A` couvre la pompe centri
 
 À ce stade, « multimodal » désigne la combinaison du texte et des tableaux convertis en texte pour répondre. L’interprétation de schémas, l’OCR des PDF numérisés et les modèles de vision restent des pistes.
 
-## Environnement et points d’entrée
+## Environnement et points d’entrée historiques
 
 - Le prototype a été développé sous Windows avec PowerShell et Python 3.11. L’environnement local `.venv311` contient les intégrations utilisées lors de la revue.
 - PostgreSQL/PGVector s’exécute via Docker Compose et Ollama sur le poste. Les deux modèles doivent être disponibles localement.
-- Depuis la racine, lancer `python query_multimodal.py` pour le parcours interactif texte + tableaux, ou `python query.py` pour le parcours textuel. Saisir `q` pour quitter.
+- Les commandes terminal `query_multimodal.py` et `query.py` utilisent désormais Qdrant.
 - `diagnostic.py`, `test_extraction_texte.py`, `test_tableaux_corriges.py` et `test_rag_tableaux.py` servent aux contrôles du prototype.
 - `requirements.txt` ne déclare pas explicitement PyMuPDF ni les intégrations LlamaIndex pour Ollama et PGVector. La reproductibilité d’une installation neuve reste à vérifier. Les scripts contiennent des identifiants de démonstration en dur.
 

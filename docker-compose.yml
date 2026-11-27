@@ -1,4 +1,11 @@
 services:
+  qdrant:
+    image: qdrant/qdrant:v1.15.5
+    ports:
+      - "127.0.0.1:6333:6333"
+    volumes:
+      - qdrant_data:/qdrant/storage
+
   db:
     image: pgvector/pgvector:pg16
     container_name: maintidoc_db
@@ -12,4 +19,5 @@ services:
       - pgdata:/var/lib/postgresql/data
 
 volumes:
+  qdrant_data:
   pgdata:

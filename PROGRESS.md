@@ -1,10 +1,22 @@
 # Avancement de MaintiDoc
 
-État de la passation au 26 novembre 2026. Le dernier commit observé est `c4b224a8`.
+## Migration V1 du 27 novembre 2026
+
+La V1 utilise BGE-M3 via Ollama, Qdrant et LangChain dans l’ingestion, le terminal et la démo FastAPI/Streamlit. Les sources conservent la famille, le fichier et la page. Les résultats de performance ci-dessous concernent le prototype historique.
+
+Qdrant a été démarré via Docker Compose et l’indexation réelle des six PDF a publié 8 passages de texte et 6 tableaux sous l’alias `maintidoc_bge_m3`.
+
+Vérification locale via FastAPI sur les quatre questions de référence. Les trois réponses chiffrées contenaient 30 kW, 200 m³/h et 4 000 h, avec le fichier attendu et sa page 1 parmi les sources. La question sur la date de fabrication a produit une abstention, puis la formulation attendue a été vérifiée après normalisation. La recherche limitée au texte a également été testée.
 
 ## Étapes réalisées
 
-La [note de cadrage V1](NOTE_CADRAGE_V1.md) formalise le livrable L1.1. Le maintien de PostgreSQL/PGVector, de `nomic-embed-text` via Ollama et de LlamaIndex pour la V1 a été confirmé le 26 novembre 2026.
+Les six PDF de test ont désormais un identifiant, une version interne `demo-1` et un groupe de démonstration dans [l’inventaire](corpus/metadata.csv). La collection active Qdrant a été reconstruite et ses 14 points contrôlés. Un filtre Qdrant sur chaque groupe retrouve les trois PDF correspondants, soit sept points par groupe.
+
+La démonstration locale relie [Streamlit](interface.py) à [FastAPI](api.py). FastAPI authentifie les comptes `demo_pompes` et `demo_moteurs`, filtre les passages Qdrant avant la génération et vérifie les droits lors de l’ouverture directe des PDF. Les commandes et les variables des mots de passe figurent dans le [README](README.md#10-exécution-et-tests). Les six PDF constituent le corpus du test initial demandé par le professeur.
+
+Le test local via FastAPI avec Qdrant et Ollama a renvoyé 30 kW au compte moteurs et une abstention au compte pompes pour la même question. Le contexte envoyé à la génération et les sources retournées ont été contrôlés pour chaque groupe. L’ouverture directe a renvoyé HTTP 200 dans le bon groupe, HTTP 403 dans l’autre et HTTP 401 sans identifiants ou avec un mauvais mot de passe. Streamlit a transmis le profil sélectionné lors d’un test automatisé avec réponse HTTP simulée. Le scénario complet depuis l’interface et le rapport L1.6 restent à finaliser.
+
+La [note de cadrage V1](NOTE_CADRAGE_V1.md) formalise le livrable L1.1 et décrit la nouvelle pile.
 
 | Jalon | Trace dans le dépôt |
 | --- | --- |
@@ -31,10 +43,10 @@ Le rapport indique **76,96 s en moyenne** et une médiane de **47,77 s** calcul�
 - La première question est nettement plus lente. Le chargement à froid des modèles ou les premières connexions peuvent y contribuer. Le rapport contient un seul passage de quatre questions différentes et ne permet pas d’isoler ces effets.
 - `query_multimodal.py` et `evaluation_rag.py` passent la même chaîne à deux retrievers successifs. Dans la version locale inspectée de LlamaIndex, chaque appel construit son propre `QueryBundle` et calcule le vecteur s’il est absent. Partager un vecteur pré-calculé entre les deux recherches peut éviter un appel d’embedding. Le gain reste à quantifier.
 
-## Prochaine étape proposée, en attente d’accord
+## Plan de profilage du prototype historique
 
 1. Instrumenter `evaluation_rag.py` pour distinguer l’embedding, les deux recherches PGVector, la fusion et le contexte, puis la génération. Quand les métriques Ollama sont disponibles, relever le chargement du modèle, le traitement du prompt et la génération des jetons. Préserver le rapport historique lors des nouveaux essais.
 2. Rejouer à plusieurs reprises les mêmes questions à froid et à chaud. Consigner les conditions, les durées par étape et la médiane de bout en bout. Suivre en parallèle l’exactitude, les sources, les unités et l’abstention.
 3. Après cette mesure de référence, tester le calcul d’un seul embedding par question pour les deux recherches. Comparer avec les mêmes questions, index, paramètres de récupération et prompt. Déterminer à partir des résultats s’il faut agir ensuite sur le chargement d’Ollama, la taille du contexte ou la génération.
 
-À la passation, l’instrumentation et les optimisations restent à mettre en œuvre. Aucune nouvelle campagne de mesure n’a été lancée.
+L’instrumentation et l’essai d’embedding partagé figurent dans le commit `09db4f41` et les rapports `resultats_profilage_*.json`. Une nouvelle référence de latence reste à établir sur la V1.

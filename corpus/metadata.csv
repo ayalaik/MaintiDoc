@@ -1,0 +1,7 @@
+chemin,document_id,version,groupes_autorises
+famille_A/fiche_technique_pompe_PC-200.pdf,pompe-pc200-fiche,demo-1,demo_pompes
+famille_A/guide_depannage_pompes_centrifuges.pdf,pompes-centrifuges-guide,demo-1,demo_pompes
+famille_A/manuel_maintenance_pompe_PC-200.pdf,pompe-pc200-manuel,demo-1,demo_pompes
+famille_B/fiche_technique_moteur_ME-30.pdf,moteur-me30-fiche,demo-1,demo_moteurs
+famille_B/guide_depannage_moteurs_electriques.pdf,moteurs-electriques-guide,demo-1,demo_moteurs
+famille_B/manuel_maintenance_moteur_ME-30.pdf,moteur-me30-manuel,demo-1,demo_moteurs

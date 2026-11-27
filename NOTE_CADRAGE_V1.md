@@ -8,11 +8,11 @@ Un technicien ou un responsable de maintenance pose une question en français su
 
 Le corpus cible comprend 30 à 50 documents autorisés sur deux familles d’équipements. Le corpus actuel compte six PDF couvrant la pompe PC-200 et le moteur ME-30. Les tableaux peuvent contribuer aux réponses sous forme de texte structuré. L’analyse de photographies et de schémas, le fine-tuning, l’historique via MCP, les tickets et le bot relèvent des étapes suivantes.
 
-## Architecture du prototype
+## Architecture de la V1
 
-- **Ingestion.** [ingestion.py](ingestion.py) lit et découpe le texte des PDF avec PyMuPDF et LlamaIndex. [extraction_multimodale.py](extraction_multimodale.py) extrait notamment les tableaux, puis [indexation_tableaux.py](indexation_tableaux.py) les convertit en texte structuré et les indexe.
-- **Recherche.** Ollama exécute `nomic-embed-text`. PostgreSQL/PGVector stocke les passages et tableaux dans `data_chunks` et `data_tableaux`. Les métadonnées utilisées pour la provenance comprennent la famille, le fichier et la page.
-- **Réponse.** [query.py](query.py) propose un parcours textuel et [query_multimodal.py](query_multimodal.py) combine texte et tableaux. Ollama exécute `llama3.2:3b` pour formuler la réponse. Le terminal affiche les sources récupérées.
+- **Ingestion.** [index_qdrant.py](index_qdrant.py) extrait le texte et les tableaux avec PyMuPDF, découpe le texte avec LangChain et indexe les passages dans Qdrant avec BGE-M3 via Ollama. La famille, le fichier et la page sont conservés.
+- **Réponse.** [query_multimodal.py](query_multimodal.py) assemble la recherche Qdrant et la génération avec LangChain. Ollama exécute `llama3.2:3b`. [query.py](query.py) limite la recherche au texte.
+- **Démonstration.** FastAPI expose le RAG et Streamlit affiche la réponse et les sources.
 
 ## Architecture à livrer
 
@@ -38,15 +38,15 @@ flowchart LR
 
 | Composant | Feuille de route | Prototype | Décision ou travail restant |
 | --- | --- | --- | --- |
-| Base vectorielle | Qdrant | PostgreSQL/PGVector | PostgreSQL/PGVector validé pour la V1. |
-| Embeddings | BGE-M3 | `nomic-embed-text` via Ollama | `nomic-embed-text` via Ollama validé pour la V1. |
-| Chaîne RAG | LangChain | LlamaIndex | LlamaIndex validé pour la V1. |
+| Base vectorielle | Qdrant | Qdrant | Collection dédiée à la V1. |
+| Embeddings | BGE-M3 | BGE-M3 via Ollama | Embeddings denses. |
+| Chaîne RAG | LangChain | LangChain | Recherche Qdrant et génération locale. |
 | Corpus et extraction | 30 à 50 PDF autorisés, deux familles, PyMuPDF et OCR si nécessaire | Six PDF, deux familles, PyMuPDF et extraction des tableaux | Agrandir le corpus, vérifier les autorisations et appliquer l’OCR si nécessaire. |
-| Métadonnées et accès | Versions, pages et droits d’accès | Famille, fichier et page | Ajouter les versions et les groupes, puis appliquer les droits à la recherche et à la consultation. |
-| API et interface | FastAPI et Streamlit | Scripts en terminal | Exposer le RAG dans FastAPI et relier Streamlit à l’API. |
+| Métadonnées et accès | Versions, pages et droits d’accès | Qdrant filtre les passages par groupe et FastAPI contrôle la consultation du PDF | Vérifier les scénarios d’accès lors de la recette. |
+| API et interface | FastAPI et Streamlit | Démonstration locale avec les comptes pompes et moteurs | Rejouer les scénarios depuis l’interface. |
 | Validation | Rapport de tests documentaires et d’accès | Évaluation préliminaire des réponses, documents retrouvés et latences | Vérifier le soutien des réponses par les pages citées et tester les accès autorisés et refusés. |
 
-La V1 s’appuie sur la pile locale, dont les trois écarts techniques ont été confirmés le 26 novembre 2026.
+La V1 adopte BGE-M3, Qdrant et LangChain conformément à la feuille de route.
 
 ## Critères de recette de la V1
 

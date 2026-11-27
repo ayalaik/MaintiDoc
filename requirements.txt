@@ -7,6 +7,8 @@ llama-index-llms-ollama
 llama-index-vector-stores-postgres
 llama-index
 langchain
+langchain-ollama==1.2.0
+langchain-qdrant==1.2.0
 langchain-community
 psycopg2-binary
 requests

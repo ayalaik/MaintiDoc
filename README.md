@@ -2,7 +2,7 @@
 
 > **Projet de bout en bout :** centralisation de la documentation technique, extraction multimodale, recherche sémantique, assistance au diagnostic et aide à la décision grâce à une architecture RAG locale.
 
-**Statut :** prototype fonctionnel pour l'ingestion et la recherche documentaire ; développement des fonctionnalités applicatives avancées en cours / envisagé. Les sections « Vision cible » ne constituent pas des fonctionnalités déjà livrées.
+**V1.** PyMuPDF, BGE-M3 via Ollama, Qdrant et LangChain alimentent la démo FastAPI et Streamlit. Voir les [commandes de la V1](#10-exécution-et-tests). Les descriptions de PGVector et LlamaIndex dans les sections d’architecture retracent le prototype historique.
 
 ## Sommaire
 
@@ -269,7 +269,42 @@ Les scripts du prototype contiennent actuellement des identifiants de base de do
 
 ## 10. Exécution et tests
 
-Depuis la racine du projet, avec `.venv311` activé :
+### Démonstration locale avec FastAPI et Streamlit
+
+Depuis la racine du dépôt, utiliser l’environnement `.venv311` (Python 3.11). Si nécessaire, le créer avec `py -3.11 -m venv .venv311` et installer les dépendances avec `.\.venv311\Scripts\python.exe -m pip install -r requirements.txt`.
+
+```powershell
+docker compose up -d qdrant
+ollama pull bge-m3:567m
+ollama pull llama3.2:3b
+.\.venv311\Scripts\python.exe index_qdrant.py
+```
+
+Qdrant écoute sur `127.0.0.1:6333` et conserve ses données dans un volume Docker. Ollama écoute sur `127.0.0.1:11434`. Pour modifier ces adresses, définir `MAINTIDOC_QDRANT_URL` et `MAINTIDOC_OLLAMA_URL`. L’indexation conserve la famille, le fichier, la page et le type du passage. L’alias `maintidoc_bge_m3` est mis à jour après l’écriture de la collection. Les collections précédentes sont conservées.
+
+[L’inventaire du corpus](corpus/metadata.csv) contient une ligne par PDF, avec son chemin relatif à `corpus/`, un `document_id` stable, une `version` et les `groupes_autorises` séparés par des points-virgules si nécessaire. L’ingestion vérifie la correspondance entre l’inventaire et les PDF et copie ces métadonnées sur chaque passage et tableau. `demo-1` est une version interne et `demo_pompes` et `demo_moteurs` sont les groupes du scénario de test.
+
+Dans un premier terminal, lancer l’API.
+
+```powershell
+$env:MAINTIDOC_DEMO_POMPES_PASSWORD = '<mot-de-passe-pompes>'
+$env:MAINTIDOC_DEMO_MOTEURS_PASSWORD = '<mot-de-passe-moteurs>'
+.\.venv311\Scripts\python.exe -m uvicorn api:app --host 127.0.0.1 --port 8000
+```
+
+Remplacer les deux exemples par des mots de passe ASCII distincts, réservés au test local. FastAPI associe le compte `demo_pompes` au groupe des pompes et `demo_moteurs` au groupe des moteurs. Streamlit transmet les identifiants à l’API locale via HTTP Basic.
+
+Dans un deuxième terminal, lancer l’interface.
+
+```powershell
+.\.venv311\Scripts\python.exe -m streamlit run interface.py --server.address 127.0.0.1
+```
+
+Ouvrir [MaintiDoc](http://127.0.0.1:8501), choisir `demo_moteurs`, saisir son mot de passe et demander « Quelle est la puissance nominale du moteur ME-30 ? ». Avec `demo_pompes`, la même question doit aboutir à une abstention et le contexte reste limité aux documents de pompes. Le contrat de l’API est visible dans [Swagger UI](http://127.0.0.1:8000/docs).
+
+Depuis Swagger UI, utiliser **Authorize** et appeler `GET /documents/moteur-me30-fiche`. Le compte moteurs reçoit le PDF, le compte pompes reçoit un refus HTTP 403 et une requête sans identifiants reçoit HTTP 401. Les droits de la démo s’appliquent aux requêtes FastAPI. Les scripts terminal sont destinés à l’opérateur local, qui a accès au corpus et à Qdrant.
+
+Pour interroger la V1 dans le terminal, lancer `query_multimodal.py` pour le texte et les tableaux ou `query.py` pour le texte seul. Les commandes PGVector ci-dessous concernent le prototype historique.
 
 ### 10.1 Indexer les textes
 
@@ -299,7 +334,7 @@ python indexation_tableaux.py
 docker exec maintidoc_db psql -U maintidoc -d maintidoc -c "SELECT 'textes' AS type, COUNT(*) FROM data_chunks UNION ALL SELECT 'tableaux', COUNT(*) FROM data_tableaux;"
 ```
 
-### 10.5 Interroger les documents
+### 10.5 Interroger la V1 sur le texte
 
 ```powershell
 python query.py
@@ -311,7 +346,7 @@ python query.py
 python test_rag_tableaux.py
 ```
 
-### 10.7 Tester la fusion texte + tableaux (après intégration)
+### 10.7 Interroger la V1 sur le texte et les tableaux
 
 ```powershell
 python query_multimodal.py
@@ -367,7 +402,7 @@ __pycache__/
 
 ## 12. Déploiement cible
 
-**État actuel :** les scripts Python s'exécutent localement ; PostgreSQL/PGVector tourne dans Docker et Ollama est accessible depuis le poste.
+**État actuel.** Qdrant tourne dans Docker. L’indexation, FastAPI, Streamlit et Ollama s’exécutent localement.
 
 **Architecture cible envisagée :** une interface web communique avec une API applicative ; l'API orchestre la recherche RAG, la gestion des documents et les fonctions de maintenance ; PostgreSQL conserve les métadonnées et les embeddings ; Ollama héberge les modèles. Une configuration Docker Compose plus complète pourra simplifier le lancement de l'ensemble.
 
