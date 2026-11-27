@@ -271,6 +271,8 @@ Les scripts du prototype contiennent actuellement des identifiants de base de do
 
 ### Démonstration locale avec FastAPI et Streamlit
 
+Les résultats de la validation sur les six PDF du corpus pilote figurent dans le [rapport de tests L1.6](RAPPORT_TESTS_L1_6.md).
+
 Depuis la racine du dépôt, utiliser l’environnement `.venv311` (Python 3.11). Si nécessaire, le créer avec `py -3.11 -m venv .venv311` et installer les dépendances avec `.\.venv311\Scripts\python.exe -m pip install -r requirements.txt`.
 
 ```powershell

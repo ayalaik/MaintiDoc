@@ -14,7 +14,7 @@ Les six PDF de test ont désormais un identifiant, une version interne `demo-1` 
 
 La démonstration locale relie [Streamlit](interface.py) à [FastAPI](api.py). FastAPI authentifie les comptes `demo_pompes` et `demo_moteurs`, filtre les passages Qdrant avant la génération et vérifie les droits lors de l’ouverture directe des PDF. Les commandes et les variables des mots de passe figurent dans le [README](README.md#10-exécution-et-tests). Les six PDF constituent le corpus du test initial demandé par le professeur.
 
-Le test local via FastAPI avec Qdrant et Ollama a renvoyé 30 kW au compte moteurs et une abstention au compte pompes pour la même question. Le contexte envoyé à la génération et les sources retournées ont été contrôlés pour chaque groupe. L’ouverture directe a renvoyé HTTP 200 dans le bon groupe, HTTP 403 dans l’autre et HTTP 401 sans identifiants ou avec un mauvais mot de passe. Streamlit a transmis le profil sélectionné lors d’un test automatisé avec réponse HTTP simulée. Le scénario complet depuis l’interface et le rapport L1.6 restent à finaliser.
+Les deux profils ont été validés manuellement depuis Streamlit le 27 novembre 2026. Sur la même question, le profil moteurs a reçu 30 kW avec la page 1 de la fiche ME-30 parmi les sources. Le profil pompes a reçu une abstention et uniquement des sources du groupe pompes. Les essais FastAPI ont également vérifié le filtrage des passages avant génération et les statuts 200, 403 et 401 lors de l’ouverture directe du PDF. Le [rapport L1.6](RAPPORT_TESTS_L1_6.md) rassemble les résultats et les deux captures.
 
 La [note de cadrage V1](NOTE_CADRAGE_V1.md) formalise le livrable L1.1 et décrit la nouvelle pile.
 
